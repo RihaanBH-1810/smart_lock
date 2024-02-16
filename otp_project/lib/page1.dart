@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'Succes.dart';
 import 'page.dart';
 import 'username.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class start extends StatefulWidget {
   const start({Key? key});
@@ -13,6 +14,7 @@ class start extends StatefulWidget {
 class _startState extends State<start> {
 
   String image = 'assets/images/lock.png';
+  bool connect = false;
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +23,13 @@ class _startState extends State<start> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Smart Lock",
-        style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),),
+        style: TextStyle(color: Color.fromARGB(255, 255, 255, 255),fontFamily: GoogleFonts.playfairDisplay().fontFamily,),),
         backgroundColor: Color.fromARGB(255, 1, 1, 1),
       ),
       body:Stack(
         children: [
         Positioned(
-          top: screenHeight*0.3,
+          top: screenHeight*0.2,
           left: screenWidth*0.3,
           child: Container(
             height: screenHeight*0.3,
@@ -42,12 +44,13 @@ class _startState extends State<start> {
           )
         ),
         Positioned(
-          top: screenHeight*0.7,
+          top: screenHeight*0.6,
           left: screenWidth*0.3,
           child: ElevatedButton(
               child: Text("Connect to lock"),
               style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(250, 0, 0, 0),
+                    foregroundColor: Color.fromARGB(255, 255, 255, 255),
                     textStyle: TextStyle(
                       fontSize: 15,
                       color: Color.fromARGB(255, 253, 249, 249),
@@ -55,6 +58,7 @@ class _startState extends State<start> {
               onPressed: () { 
                     setState(() {
                       image = 'assets/images/unlock.png';
+                      connect = true;
                     });
                   },
               
@@ -62,20 +66,23 @@ class _startState extends State<start> {
         ),
 
         Positioned(
-          top: screenHeight*0.8,
+          top: screenHeight*0.7,
           left: screenWidth*0.3,
           child: ElevatedButton(
               child: Text("Enter Username"),
               style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(250, 0, 0, 0),
+                    foregroundColor: Color.fromARGB(255, 255, 255, 255),
                     textStyle: TextStyle(
                       fontSize: 15,
                       color: Color.fromARGB(255, 253, 249, 249),
                       fontWeight: FontWeight.bold),),
-              onPressed: () { 
+              onPressed: () {
+                if (connect=true){
                    Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => username()));
+                    MaterialPageRoute(builder: (context) => username()));}
+                else{print("sorry");}
                   },
               
               ),

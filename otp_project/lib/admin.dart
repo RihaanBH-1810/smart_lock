@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'Succes.dart';
 import 'page.dart';
 import 'username.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class admin extends StatefulWidget {
   const admin({Key? key});
@@ -21,9 +22,12 @@ class _adminState extends State<admin> {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: AppBar(
+        leading: IconButton(icon: Icon(Icons.arrow_back_ios_sharp,color: Color.fromARGB(255, 247, 247, 247),), onPressed: () {Navigator.pop(context);},),
         title: Text("Smart Lock",
-        style: TextStyle(color: Color.fromARGB(255, 255, 255, 255)),),
+        style: TextStyle(color: Color.fromARGB(255, 255, 255, 255),fontFamily: GoogleFonts.playfairDisplay().fontFamily,),
+        ),
         backgroundColor: Color.fromARGB(255, 1, 1, 1),
       ),
       body: Stack(
@@ -114,7 +118,7 @@ class _adminState extends State<admin> {
           ),
 
           Positioned(
-            top: screenHeight*0.54,
+            top: screenHeight*0.6,
             left: screenWidth*0.2,
             child: Container(
               height: screenHeight*0.06,
@@ -139,9 +143,40 @@ class _adminState extends State<admin> {
             ),)
           ),
 
+          Positioned(
+            top: screenHeight*0.35,
+            left: screenWidth*0.37,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Color.fromARGB(255, 1, 1, 1)
+              ),
+             onPressed: () {  },
+             child: Text("Add User",
+             style: TextStyle(fontFamily: GoogleFonts.playfairDisplay().fontFamily,),),),
+             
+          ),
 
+          Positioned(
+            top: screenHeight*0.74,
+            left: screenWidth*0.345,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                foregroundColor: Color.fromARGB(255, 1, 1, 1)
+              ),
+             onPressed: () {  },
+             child: Text("Delete User",style: TextStyle(fontFamily: GoogleFonts.playfairDisplay().fontFamily,),)),
+             
+          ),
           
-
+          Positioned(
+            top: screenHeight*0.02,
+            left: screenWidth*0.12,
+            child: Text("Welcome Admin,",
+            style: TextStyle(
+              fontSize: 30,
+              fontFamily: GoogleFonts.playfairDisplay().fontFamily,
+             ),),
+          )
         ],
       ),
     );

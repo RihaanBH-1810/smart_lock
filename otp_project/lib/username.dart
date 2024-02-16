@@ -21,13 +21,13 @@ class _usernameState extends State<username> {
   namecheck(name) async{
     var client =http.Client();
 
-    var uri = Uri.parse('');
+    var uri = Uri.parse('http://group4attendance.pythonanywhere.com/api/courses/');
     client.post(
       uri,
       headers: {
         'Content-Type': 'application/json',
       },
-      body: jsonEncode(<String, String> {'username': name})
+      body: jsonEncode(<String, String> {'course_name': name})
       );
   }
 

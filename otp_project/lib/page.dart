@@ -3,7 +3,8 @@ import 'package:otp_project/admin.dart';
 import 'Succes.dart';
 import 'admin.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 
 
@@ -21,6 +22,19 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
 
   final otp =  TextEditingController();
+
+  otpcheck(name) async{
+    var client =http.Client();
+
+    var uri = Uri.parse('http://group4attendance.pythonanywhere.com/api/courses/');
+    client.post(
+      uri,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(<String, String> {'course_name': name})
+      );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -156,7 +170,8 @@ class _HomeState extends State<Home> {
                           // fontWeight: FontWeight.bold
                           ),),
                 onPressed: () {
-              
+                  print(otp.text);
+                  otpcheck(otp.text);
                   if(widget.user=='admin'){
                       Navigator.push(
                       context,

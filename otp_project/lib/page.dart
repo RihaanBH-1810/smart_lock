@@ -13,8 +13,11 @@ class Home extends StatefulWidget {
 
   final String user;
 
-  Home({required this.user});
+  Home({required this.user,required this.lockurl});
 
+  final String lockurl;
+
+  
   @override
   State<Home> createState() => _HomeState();
 }
@@ -175,7 +178,7 @@ class _HomeState extends State<Home> {
                   if(widget.user=='admin'){
                       Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => admin()
+                      MaterialPageRoute(builder: (context) => admin(lockurl: widget.lockurl,)
                         
                       ));}
               

@@ -5,7 +5,11 @@ import 'username.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class admin extends StatefulWidget {
-  const admin({Key? key});
+  
+
+  admin({required this.lockurl});
+
+  final String lockurl;
 
   @override
   State<admin> createState() => _adminState();
@@ -150,7 +154,7 @@ class _adminState extends State<admin> {
               style: ElevatedButton.styleFrom(
                 foregroundColor: Color.fromARGB(255, 1, 1, 1)
               ),
-             onPressed: () {  },
+             onPressed: () { print(widget.lockurl); },
              child: Text("Add User",
              style: TextStyle(fontFamily: GoogleFonts.playfairDisplay().fontFamily,),),),
              

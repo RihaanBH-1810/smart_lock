@@ -18,19 +18,20 @@ class _startState extends State<start> {
   String image = 'assets/images/lock.png';
   bool connect = false;
   final url = TextEditingController();
+  String lockurl = '';
 
-  urlcheck(name) async{
-    var client =http.Client();
+  // urlcheck(name) async{
+  //   var client =http.Client();
 
-    var uri = Uri.parse('http://group4attendance.pythonanywhere.com/api/courses/');
-    client.post(
-      uri,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode(<String, String> {'course_name': name})
-      );
-  }
+  //   var uri = Uri.parse('http://group4attendance.pythonanywhere.com/api/courses/');
+  //   client.post(
+  //     uri,
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: jsonEncode(<String, String> {'course_name': name})
+  //     );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,7 @@ class _startState extends State<start> {
       body:Stack(
         children: [
         Positioned(
-          top: screenHeight*0.15,
+          top: screenHeight*0.10,
           left: screenWidth*0.3,
           child: Container(
             height: screenHeight*0.3,
@@ -61,7 +62,7 @@ class _startState extends State<start> {
         ),
 
         Positioned(
-            top: screenHeight*0.47,
+            top: screenHeight*0.40,
             left: screenWidth*0.2,
             child: Container(
               height: screenHeight*0.08,
@@ -87,6 +88,29 @@ class _startState extends State<start> {
           ),
 
         Positioned(
+          top: screenHeight*0.51,
+          left: screenWidth*0.34,
+          child: ElevatedButton(
+              child: Text("Save URL"),
+              style: ElevatedButton.styleFrom(
+                    backgroundColor: Color.fromARGB(250, 0, 0, 0),
+                    foregroundColor: Color.fromARGB(255, 255, 255, 255),
+                    textStyle: TextStyle(
+                      fontSize: 15,
+                      color: Color.fromARGB(255, 253, 249, 249),
+                      fontWeight: FontWeight.bold),),
+              onPressed: () {
+                    //urlcheck(url.text);
+                    setState(() {
+                      lockurl = url.text;
+                    });
+
+                  },
+              
+              ),
+        ),
+
+        Positioned(
           top: screenHeight*0.6,
           left: screenWidth*0.3,
           child: ElevatedButton(
@@ -99,7 +123,7 @@ class _startState extends State<start> {
                       color: Color.fromARGB(255, 253, 249, 249),
                       fontWeight: FontWeight.bold),),
               onPressed: () {
-                    urlcheck(url.text);
+                    //urlcheck(url.text);
                     setState(() {
                       image = 'assets/images/unlock.png';
                       connect = true;
@@ -126,7 +150,7 @@ class _startState extends State<start> {
                 if (connect=true){
                    Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => username()));}
+                    MaterialPageRoute(builder: (context) => username(lockurl:lockurl,)));}
                 else{print("sorry");}
                   },
               

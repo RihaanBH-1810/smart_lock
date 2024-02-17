@@ -8,7 +8,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 
 class username extends StatefulWidget {
-  const username({Key? key});
+  
+
+  final String lockurl;
+
+  username({required this.lockurl});
 
   @override
   State<username> createState() => _usernameState();
@@ -146,6 +150,7 @@ class _usernameState extends State<username> {
                       context,
                       MaterialPageRoute(builder: (context) => Home(
                         user: otp.text,
+                        lockurl : widget.lockurl,
                       )));
                     },
                 

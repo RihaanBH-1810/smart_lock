@@ -23,7 +23,7 @@ class _HomeState extends State<Home> {
   final otp = TextEditingController();
 
   Future<void> otpcheck(String otp) async {
-    final uri = Uri.parse('http://${widget.lockurl}/username');
+    final uri = Uri.parse('http://${widget.lockurl}/otp');
 
     try {
       final response = await http.post(

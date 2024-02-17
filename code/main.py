@@ -7,7 +7,9 @@ import umail
 import network 
 from time import sleep 
 import random
+from servo import Servo
 
+servo = Servo(machine.Pin(12))
 OTP = "" 
 WIFI_SSID = "R18"
 WIFI_PASS = "12345678910"
@@ -30,6 +32,9 @@ users = [
     {"username" : "A",
      "email" : "aayushman345@gmail.com"}
     ]
+
+
+
 
 def send_otp(recipient_email, username):
   global OTP
@@ -145,7 +150,9 @@ def process_post_request(path, request):
     elif path == "/otp":
         otp = data["otp"]
         if otp_verify:
-            print("lock opened")
+            servo.write_angle(degrees = 0)
+            sleep(10)
+            servo.write_angle(degrees = 90)
         else:
             print("wrong otp")
         return "HTTP/1.0 200 OK\r\n\r\nOTP received"

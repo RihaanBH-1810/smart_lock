@@ -3,6 +3,8 @@ import 'Succes.dart';
 import 'page.dart';
 import 'username.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class start extends StatefulWidget {
   const start({Key? key});
@@ -15,6 +17,20 @@ class _startState extends State<start> {
 
   String image = 'assets/images/lock.png';
   bool connect = false;
+  final url = TextEditingController();
+
+  urlcheck(name) async{
+    var client =http.Client();
+
+    var uri = Uri.parse('http://group4attendance.pythonanywhere.com/api/courses/');
+    client.post(
+      uri,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(<String, String> {'course_name': name})
+      );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +45,7 @@ class _startState extends State<start> {
       body:Stack(
         children: [
         Positioned(
-          top: screenHeight*0.2,
+          top: screenHeight*0.15,
           left: screenWidth*0.3,
           child: Container(
             height: screenHeight*0.3,
@@ -43,6 +59,33 @@ class _startState extends State<start> {
             
           )
         ),
+
+        Positioned(
+            top: screenHeight*0.47,
+            left: screenWidth*0.2,
+            child: Container(
+              height: screenHeight*0.08,
+              width: screenWidth*0.6,
+            child: TextField(
+              controller: url,
+              style: TextStyle(
+                fontSize: 16.0,
+                color: Color.fromARGB(255, 0, 0, 0), // Text color
+              ),
+              decoration: InputDecoration(
+                hintText: 'Enter lock url',
+                hintStyle: TextStyle(
+                  fontSize: 14.0,
+                  color: const Color.fromARGB(255, 0, 0, 0),
+                ),
+                border: OutlineInputBorder( 
+                  borderRadius: BorderRadius.circular(8.0),
+                  borderSide: BorderSide(color: Colors.blue),
+                ),
+              )
+            ),)
+          ),
+
         Positioned(
           top: screenHeight*0.6,
           left: screenWidth*0.3,
@@ -55,11 +98,13 @@ class _startState extends State<start> {
                       fontSize: 15,
                       color: Color.fromARGB(255, 253, 249, 249),
                       fontWeight: FontWeight.bold),),
-              onPressed: () { 
+              onPressed: () {
+                    urlcheck(url.text);
                     setState(() {
                       image = 'assets/images/unlock.png';
                       connect = true;
                     });
+
                   },
               
               ),
